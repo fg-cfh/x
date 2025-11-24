@@ -1,0 +1,20 @@
+[package]
+name = "x"
+version = "0.1.0"
+edition = "2024"
+repository = "https://github.com/fg-cfh/x"
+description = "Async Experiments"
+license = "MIT OR Apache-2.0"
+categories = ["embedded", "no-std"]
+
+[dependencies]
+cortex-m = { version = "0.7", features = [
+    "inline-asm",
+    "critical-section-single-core",
+] }
+cortex-m-rt = { version = "0.7.0" }
+nrf-pac = { version = "0.1", features = ["nrf52840", "rt"] }
+
+[profile.release]
+debug = true
+panic = "abort"

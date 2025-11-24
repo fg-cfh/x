@@ -1,0 +1,8 @@
+{
+  "rust-analyzer.cargo.allTargets": false,
+  "rust-analyzer.cargo.target": "thumbv7em-none-eabi",
+  "rust-analyzer.cargo.features": [],
+  "rust-analyzer.imports.granularity.enforce": true,
+  "rust-analyzer.imports.preferNoStd": true,
+  "rust-analyzer.check.command": "clippy"
+}
