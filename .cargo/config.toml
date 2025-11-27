@@ -1,5 +1,6 @@
 [build]
 target = "thumbv7em-none-eabihf"
+rustflags = ["-Zunstable-options", "-Cpanic=immediate-abort", "-Awarnings"]
 
-[env]
-DEFMT_LOG = "info"
+[unstable]
+build-std = ["core"]

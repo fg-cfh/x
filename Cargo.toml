@@ -3,9 +3,11 @@ name = "x"
 version = "0.1.0"
 edition = "2024"
 repository = "https://github.com/fg-cfh/x"
-description = "Async Experiments"
+description = "nRF52840 high-precision timer and radio driver"
+authors = ["Florian Grandel <fgrandel@code-for-humans.de>"]
 license = "MIT OR Apache-2.0"
-categories = ["embedded", "no-std"]
+categories = ["embedded", "hardware-support", "no-std"]
+keywords = ["nrf52840", "radio", "timer"]
 
 [dependencies]
 cortex-m = { version = "0.7", features = [
@@ -13,8 +15,32 @@ cortex-m = { version = "0.7", features = [
     "critical-section-single-core",
 ] }
 cortex-m-rt = { version = "0.7.0" }
+fugit = "0.3"
 nrf-pac = { version = "0.1", features = ["nrf52840", "rt"] }
+paste = "1"
+
+[features]
+# Enables GPIO debug signals for high-precision timer events.
+timer-trace = []
+
+# Use an external sleep timer clock source.
+#
+# Note: MUST be enabled while the LF clock pin (X1) is actively driven by an
+#       external signal otherwise your hardware may be damaged.
+ext-lf-clk = []
+
+# In release mode: removes fields and assertions that have no runtime effect in
+# functionally correct code. No effect in debug mode.
+#
+# # Safety
+#
+# This feature is unsafe as it will remove runtime checks required to enforce
+# safety. Only enable it once you've sufficiently tested your code with safety
+# checks in place and are confident that it is functionally correctly, i.e.
+# contains no program errors.
+unsafe-optimize = []
 
 [profile.release]
+#opt-level = "s"
 debug = true
 panic = "abort"
